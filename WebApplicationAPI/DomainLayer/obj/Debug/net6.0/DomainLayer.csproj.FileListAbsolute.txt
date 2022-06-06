@@ -1,0 +1,14 @@
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\DomainLayer\bin\Debug\net6.0\DomainLayer.deps.json
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\DomainLayer\bin\Debug\net6.0\DomainLayer.dll
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\DomainLayer\bin\Debug\net6.0\DomainLayer.pdb
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\DomainLayer\obj\Debug\net6.0\DomainLayer.csproj.AssemblyReference.cache
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\DomainLayer\obj\Debug\net6.0\DomainLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\DomainLayer\obj\Debug\net6.0\DomainLayer.AssemblyInfoInputs.cache
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\DomainLayer\obj\Debug\net6.0\DomainLayer.AssemblyInfo.cs
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\DomainLayer\obj\Debug\net6.0\DomainLayer.csproj.CoreCompileInputs.cache
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\DomainLayer\obj\Debug\net6.0\DomainLayer.dll
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\DomainLayer\obj\Debug\net6.0\refint\DomainLayer.dll
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\DomainLayer\obj\Debug\net6.0\DomainLayer.pdb
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\DomainLayer\obj\Debug\net6.0\ref\DomainLayer.dll
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\DomainLayer\bin\Debug\net6.0\DomainLayer.runtimeconfig.json
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\DomainLayer\obj\Debug\net6.0\DomainLayer.genruntimeconfig.cache

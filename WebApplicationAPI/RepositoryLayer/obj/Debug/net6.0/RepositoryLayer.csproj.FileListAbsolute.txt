@@ -1,0 +1,17 @@
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\bin\Debug\net6.0\RepositoryLayer.deps.json
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\bin\Debug\net6.0\RepositoryLayer.dll
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\bin\Debug\net6.0\RepositoryLayer.pdb
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\bin\Debug\net6.0\DomainLayer.dll
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\bin\Debug\net6.0\DomainLayer.pdb
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.csproj.AssemblyReference.cache
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.AssemblyInfoInputs.cache
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.AssemblyInfo.cs
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.csproj.CoreCompileInputs.cache
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.csproj.CopyComplete
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.dll
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\obj\Debug\net6.0\refint\RepositoryLayer.dll
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.pdb
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\obj\Debug\net6.0\ref\RepositoryLayer.dll
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\bin\Debug\net6.0\RepositoryLayer.runtimeconfig.json
+C:\Users\haqua\OneDrive\Máy tính\InternProject\WebApplicationAPI\RepositoryLayer\obj\Debug\net6.0\RepositoryLayer.genruntimeconfig.cache
