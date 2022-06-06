@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DomainLayer.Model;
 using DomainLayer.ViewModel.CategoryView;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.Interfaces;
 
@@ -8,6 +9,7 @@ namespace WebApplicationAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly IBaseService<Category> CategoryService;
@@ -17,7 +19,7 @@ namespace WebApplicationAPI.Controllers
             this.CategoryService = CategoryService;
             this.mapper = mapper;
         }
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Admin")]
         public IActionResult Add([FromBody] CategoryAdd model)
         {
             if (ModelState.IsValid)
