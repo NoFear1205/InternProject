@@ -12,9 +12,11 @@ namespace DomainLayer.ViewModel.ProductMapper
         [Required]
         public int Id { get; set; }
         [Required]
+        [MaxLength(100)]
         public string? Name { get; set; }
         /*[Required(ErrorMessage = "Tên nhà cung cấp không được để trống")]
         [StringLength(100)]*/
+        [MaxLength(100)]
         [Required]
         public string? Provider { get; set; }
         [Required]

@@ -19,6 +19,7 @@ namespace DomainLayer.Model
         public int CategoryID { get; private set; }
         [Display(Name = "Loại sản phẩm")]
         public Category? Category { get; private set; }
+        public Product() { }
         public void setName (string Name)
         {
             this.Name = Name;
