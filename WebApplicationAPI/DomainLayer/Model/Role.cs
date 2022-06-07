@@ -17,6 +17,6 @@ namespace DomainLayer.Model
             Id = id;
             Name = name;
         }
-        public List<User_Role>? user_Roles { get; private set; }
+        public List<User_Role>? User_Roles { get; private set; }
     }
 }

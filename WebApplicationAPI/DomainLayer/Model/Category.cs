@@ -9,7 +9,7 @@ namespace DomainLayer.Model
 {
     public class Category
     {
-        public int ID { get; private set; }
+        public int Id { get; private set; }
         public string? Name { get; private set; }
         public List<Product>? Products { get; private set; }
         public Category() { }

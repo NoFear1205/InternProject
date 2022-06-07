@@ -21,7 +21,7 @@ namespace WebApplicationRazorPage.Pages.CategoryPages
         }
         public void OnGet(int id)
         {
-            category = baseService.FindOne(c=>c.ID==id);
+            category = baseService.FindOne(c=>c.Id==id);
         }
         public IActionResult OnPost(CategoryView model)
         {

@@ -13,7 +13,7 @@ namespace DomainLayer.Model
     {
         [Required]
         [MaxLength(100)]    
-        public string name { get; set; }
+        public string Name { get; set; }
         public List<ProductAdd>? Products { get; set; }
     }
 }

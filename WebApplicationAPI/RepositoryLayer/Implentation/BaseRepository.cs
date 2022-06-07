@@ -12,78 +12,78 @@ namespace RepositoryLayer.Implentation
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-        private readonly ApplicationDbContext context;
-        private DbSet<T> table;
-        public BaseRepository(ApplicationDbContext context)
+        private readonly ApplicationDbContext Context;
+        private DbSet<T> Table;
+        public BaseRepository(ApplicationDbContext Context)
         {
-            this.context = context;
-            table = context.Set<T>();
+            this.Context = Context;
+            Table = Context.Set<T>();
         }
 
-        public bool Add(T model)
+        public bool Add(T Model)
         {
-            table.Add(model);
-            int row_Count = context.SaveChanges();
+            Table.Add(Model);
+            int row_Count = Context.SaveChanges();
             return row_Count > 0;
         }
 
-        public bool Delete(T model)
+        public bool Delete(T Model)
         {
-            table.Remove(model);
-            int row_Count = context.SaveChanges();
-            return row_Count > 0;
+            Table.Remove(Model);
+            int RowCount = Context.SaveChanges();
+            return RowCount > 0;
         }
 
-        public List<T> FindList(Expression<Func<T, bool>> predicate, string? incudes = null)
+        public List<T> FindList(Expression<Func<T, bool>> Predicate, string? Incudes = null)
         {
-            if (incudes == null)
+            if (Incudes == null)
             {
-                return table.Where(predicate).ToList();
+                return Table.Where(Predicate).ToList();
             }
             else
             {
-                var query = table.Include(incudes).Where(predicate).AsQueryable();
+                var query = Table.Include(Incudes).Where(Predicate).AsQueryable();
                 return query.ToList();
             }
         }
 
-        public T? FindOne(Expression<Func<T, bool>> predicate, string incudes)
+        public T? FindOne(Expression<Func<T, bool>> Predicate, string Incudes)
         {
-            if (incudes != null)
+            if (Incudes != null)
             {
-                return table.Include(incudes).Where(predicate).AsNoTracking().FirstOrDefault();
+                return Table.Include(Incudes).Where(Predicate).AsNoTracking().FirstOrDefault();
             }
             else
             {
-                return table.Where(predicate).AsNoTracking().FirstOrDefault();
+                return Table.Where(Predicate).AsNoTracking().FirstOrDefault();
             }
 
         }
 
         public List<T> Get()
         {
-            return table.ToList();
+            return Table.ToList();
         }
 
-        public List<T> List(Expression<Func<T, bool>> predicate, int page, int pageSize, string? incudes = null)
+        public List<T> List(Expression<Func<T, bool>> Predicate, int Page, int PageSize, string? Incudes = null)
         {
-            if(incudes != null)
+            if(Incudes != null)
             {
-                var query = table.Include(incudes).Where(predicate).AsQueryable();
-                return query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                var Query = Table.Include(Incudes).Where(Predicate).AsQueryable();
+                return Query.Skip((Page - 1) * PageSize).Take(PageSize).ToList();
             }
             else
             {
-                var query = table.Where(predicate).AsQueryable();
-                return query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                var Query = Table.Where(Predicate).AsQueryable();
+                return Query.Skip((Page - 1) * PageSize).Take(PageSize).ToList();
             }
         }
 
-        public bool Update(T model)
+        public bool Update(T Model)
         {
-            table.Update(model);
-            int row_Count = context.SaveChanges();
-            return row_Count > 0;
+            Table.Update(Model);
+            int RowCount = Context.SaveChanges();
+            return RowCount > 0;
         }
     }
 }

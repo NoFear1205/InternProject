@@ -64,7 +64,7 @@ namespace ServiceLayer.Implentation
                 return new RefreshToken()
                 {
                     refreshToken = Convert.ToBase64String(randomNumber),
-                    userID = userId,
+                    UserID = userId,
                     Expires = DateTime.UtcNow.AddMinutes(10)
                 };
             }

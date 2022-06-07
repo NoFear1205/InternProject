@@ -13,12 +13,12 @@ namespace RepositoryLayer.DbContexts.ConfigEntityType
     {
         public void Configure(EntityTypeBuilder<RefreshToken> builder)
         {
-            builder.HasKey(sc => sc.id);
+            builder.HasKey(sc => sc.Id);
 
             builder
-                .HasOne<User>(sc => sc.user)
+                .HasOne<User>(sc => sc.User)
                 .WithMany(s => s.RefreshToken)
-                .HasForeignKey(sc => sc.userID);
+                .HasForeignKey(sc => sc.UserID);
         }
     }
 }

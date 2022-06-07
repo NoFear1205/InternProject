@@ -13,35 +13,35 @@ namespace WebApplicationAPI.Controllers
     public class CategoryController : Controller
     {
         private readonly IBaseService<Category> CategoryService;
-        private readonly IMapper mapper;
-        public CategoryController(IBaseService<Category> CategoryService, IMapper mapper)
+        private readonly IMapper Mapper;
+            public CategoryController(IBaseService<Category> CategoryService, IMapper Mapper)
         {
             this.CategoryService = CategoryService;
-            this.mapper = mapper;
+            this.Mapper = Mapper;
         }
         [HttpPost, Authorize(Roles = "Admin")]
-        public IActionResult Add([FromBody] CategoryAdd model)
+        public IActionResult Add([FromBody] CategoryAdd Model)
         {
             if (ModelState.IsValid)
             {
-                  return Ok(CategoryService.Add(mapper.Map<Category>(model)));
+                  return Ok(CategoryService.Add(Mapper.Map<Category>(Model)));
             }
             return BadRequest(ModelState);
         }
         [HttpGet]
         [Route("Pagination")]
-        public IActionResult Paging(int page, string? searchValue = "", int pageSize = 0)
+        public IActionResult Paging(int Page, string? SearchValue = "", int PageSize = 0)
         {
-            if(pageSize == 0)
-                pageSize = 10;
-            if(page <= 0)
+            if(PageSize == 0)
+                PageSize = 10;
+            if(Page <= 0)
             {
-                page = 1;
+                Page = 1;
             }
             List<CategoryView> list = new List<CategoryView>();
-            foreach(var item in CategoryService.List(c => c.Name.Contains(searchValue), page, pageSize))
+            foreach(var item in CategoryService.List(c => c.Name.Contains(SearchValue), Page, PageSize))
             {
-                list.Add(mapper.Map<CategoryView>(item));
+                list.Add(Mapper.Map<CategoryView>(item));
             }
             return Ok(list);
         }
@@ -49,32 +49,32 @@ namespace WebApplicationAPI.Controllers
         [Route("Get-one")]
         public IActionResult GetOne(int Id)
         {
-            var temp = CategoryService.FindOne(c => c.ID == Id);
+            var Category = CategoryService.FindOne(c => c.Id == Id);
 
-             return Ok(mapper.Map<CategoryView>(temp));   
+             return Ok(Mapper.Map<CategoryView>(Category));   
         }
         [HttpDelete]
         [Route("Delete")]
-        public IActionResult Delete([FromBody] int[] id)
+        public IActionResult Delete([FromBody] int[] Id)
         {
-            foreach(var item in id)
+            foreach(var item in Id)
             {
-                var temp = CategoryService.FindOne(c => c.ID == item);
-                if (temp != null)
+                var Category = CategoryService.FindOne(c => c.Id == item);
+                if (Category != null)
                 {
-                    CategoryService.Delete(temp);
+                    CategoryService.Delete(Category);
                 }
             }
             return Ok("Delete record successfully");
         }
         [HttpPut]
         [Route("Update")]
-        public IActionResult Update([FromBody] CategoryView model)
+        public IActionResult Update([FromBody] CategoryView Model)
         {
             
-            if (CategoryService.FindOne(c => c.ID == model.Id) != null)
+            if (CategoryService.FindOne(c => c.Id == Model.Id) != null)
             {
-                return Ok(CategoryService.Update(mapper.Map<Category>(model)));
+                return Ok(CategoryService.Update(Mapper.Map<Category>(Model)));
             }
             else return NotFound("No find record");
         }

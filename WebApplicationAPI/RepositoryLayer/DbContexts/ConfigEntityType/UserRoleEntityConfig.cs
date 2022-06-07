@@ -16,11 +16,11 @@ namespace RepositoryLayer.DbContexts.ConfigEntityType
 
             builder
                 .HasOne<User>(sc => sc.Users)
-                .WithMany(s => s.user_Roles)
+                .WithMany(s => s.User_Roles)
                 .HasForeignKey(sc => sc.UserId);
             builder
                 .HasOne<Role>(sc => sc.Roles)
-                .WithMany(s => s.user_Roles)
+                .WithMany(s => s.User_Roles)
                 .HasForeignKey(sc => sc.RoleId);
         }
     }

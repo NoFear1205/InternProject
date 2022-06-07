@@ -10,28 +10,28 @@ namespace WebApplicationAPI.Controllers
     [Authorize]
     public class RoleController : Controller
     {
-        private readonly IBaseService<Role> role;
-        public RoleController(IBaseService<Role> role)
+        private readonly IBaseService<Role> Role;
+        public RoleController(IBaseService<Role> Role)
         {
-            this.role = role;
+            this.Role = Role;
         }
         [HttpGet]
         public IActionResult Index()
         {
-            return Ok(role.Get());
+            return Ok(Role.Get());
         }
         [HttpPost]
-        public IActionResult Index(Role model)
+        public IActionResult Index(Role Model)
         {
 
-            return Ok(role.Add(model));
+            return Ok(Role.Add(Model));
         }
         [HttpGet]
         [Route("Paging")]
-        public IActionResult ListOfRole(int page,string searchValue)
+        public IActionResult ListOfRole(int Page,string SearchValue)
         {
-            int pageSize = 10;
-            return Ok(role.List(c => c.Name.Contains(searchValue), page, pageSize));           
+            int PageSize = 10;
+            return Ok(Role.List(c => c.Name.Contains(SearchValue), Page, PageSize));           
         }
     }
 }

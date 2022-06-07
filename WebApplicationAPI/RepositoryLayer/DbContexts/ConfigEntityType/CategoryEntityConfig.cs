@@ -13,7 +13,7 @@ namespace RepositoryLayer.DbContextLayer
     {
         public void Configure(EntityTypeBuilder<Category> modelBuilder)
         {
-            modelBuilder.HasKey(c=>c.ID);
+            modelBuilder.HasKey(c=>c.Id);
             modelBuilder.Property(c=>c.Name).HasMaxLength(30).IsRequired();
             //modelBuilder.Ignore(x => x.Products);
         }

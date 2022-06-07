@@ -13,6 +13,6 @@ namespace DomainLayer.ViewModel.CategoryView
         public int Id { get; set; }
         [Required]
         [MaxLength(100)]
-        public string name { get; set; }
+        public string Name { get; set; }
     }
 }

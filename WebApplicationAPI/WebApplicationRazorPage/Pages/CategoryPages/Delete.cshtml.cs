@@ -17,11 +17,11 @@ namespace WebApplicationRazorPage.Pages.CategoryPages
         }
         public void OnGet(int Id)
         {
-            category = baseService.FindOne(c=>c.ID==Id);
+            category = baseService.FindOne(c=>c.Id==Id);
         }
         public IActionResult OnPost(int Id)
         {
-            category = baseService.FindOne(c => c.ID == Id);
+            category = baseService.FindOne(c => c.Id == Id);
             baseService.Delete(category);
             return RedirectToPage("Index");
         }

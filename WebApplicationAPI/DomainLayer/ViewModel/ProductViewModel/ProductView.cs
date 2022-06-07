@@ -12,7 +12,5 @@ namespace DomainLayer.ViewModel.CategoryView
         public string Name { get; set; }
         public string CategoryName { get; set; }
         public string Provider { get; set; }
-
-
     }
 }

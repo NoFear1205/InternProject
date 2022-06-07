@@ -11,32 +11,32 @@ namespace WebApplicationAPI.Controllers
     [Route("api")]
     public class AuthenciationController : Controller
     {
-        private readonly IBaseService<User> userService;
-        private readonly IBaseService<User_Role> useRolerService;
+        private readonly IBaseService<User> UserService;
+        private readonly IBaseService<User_Role> UserRolerService;
         private readonly IBaseService<RefreshToken> RefreshTokenService;
-        private readonly IAuthenService authenService;
-        public AuthenciationController(IBaseService<User> userService, IAuthenService authenService, IBaseService<User_Role> useRolerService, IBaseService<RefreshToken> RefreshTokenService)
+        private readonly IAuthenService AuthenService;
+        public AuthenciationController(IBaseService<User> UserService, IAuthenService AuthenService, IBaseService<User_Role> UserRolerService, IBaseService<RefreshToken> RefreshTokenService)
         {
-            this.userService = userService;
-            this.authenService = authenService;
-            this.useRolerService = useRolerService;
+            this.UserService = UserService;
+            this.AuthenService = AuthenService;
+            this.UserRolerService = UserRolerService;
             this.RefreshTokenService = RefreshTokenService;
         }
         [HttpPost]
         [Route("Login")]
-        public IActionResult login([FromBody] LoginRequest model)
+        public IActionResult Login([FromBody] LoginRequest Model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var temp = userService.FindOne(c => c.Username.Contains(model.Username));
+            var temp = UserService.FindOne(c => c.Username.Contains(Model.Username));
             if (temp == null)
             {
                 ModelState.AddModelError("Username", "Username không tồn tại");
                 return BadRequest(ModelState);
             }
-            else if (!authenService.VerifyPasswordHash(model.Password, temp.PasswordHash, temp.PasswordSalt))
+            else if (!AuthenService.VerifyPasswordHash(Model.Password, temp.PasswordHash, temp.PasswordSalt))
             {
                 ModelState.AddModelError("Password", "Password không đúng");
                 return BadRequest(ModelState);
@@ -47,45 +47,45 @@ namespace WebApplicationAPI.Controllers
                 {
                     new Claim(ClaimTypes.Name, temp.Username)
                 };
-                var list = useRolerService.FindList(c => c.UserId == temp.Id, "Roles");
+                var list = UserRolerService.FindList(c => c.UserId == temp.Id, "Roles");
                 foreach (var item in list)
                 {
                     claims.Add(new Claim(ClaimTypes.Role, item.Roles.Name));
                 };
-                var refresh = authenService.GenerateRefreshToken(temp.Id);
-                var oldRefresh = RefreshTokenService.FindOne(c => c.userID == temp.Id);
-                if (oldRefresh == null)
+                var refresh = AuthenService.GenerateRefreshToken(temp.Id);
+                var OldRefreshToken = RefreshTokenService.FindOne(c => c.UserID == temp.Id);
+                if (OldRefreshToken == null)
                 {
                     RefreshTokenService.Add(refresh);
                 }
                 else
                 {
-                    oldRefresh.refreshToken = refresh.refreshToken;
-                    oldRefresh.Expires = refresh.Expires;
-                    RefreshTokenService.Update(oldRefresh);
+                    OldRefreshToken.refreshToken = refresh.refreshToken;
+                    OldRefreshToken.Expires = refresh.Expires;
+                    RefreshTokenService.Update(OldRefreshToken);
                 }
                 
                 return Ok(new LoginResponse
                 {
-                    AccessToken = authenService.CreateToken(claims),
+                    AccessToken = AuthenService.CreateToken(claims),
                     RefreshToken = refresh.refreshToken
                 });
             }
         }
         [HttpPost]
         [Route("register")]
-        public IActionResult Register([FromBody] RegisterRequest model)
+        public IActionResult Register([FromBody] RegisterRequest Model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            else if (model.RePassword != model.Password)
+            else if (Model.RePassword != Model.Password)
             {
                 ModelState.AddModelError("RePassword", "Nhập lại mật khẩu không đúng");
                 return BadRequest(ModelState);
             }
-            else if (userService.FindOne(c => c.Username == model.Username) != null)
+            else if (UserService.FindOne(c => c.Username == Model.Username) != null)
             {
                 ModelState.AddModelError("Username", "Username đã tồn tại");
                 return BadRequest(ModelState);
@@ -93,78 +93,78 @@ namespace WebApplicationAPI.Controllers
             else
             {
                 List<User_Role> list = new List<User_Role>();
-                foreach (var item in model.Roles)
+                foreach (var item in Model.Roles)
                 {
                     list.Add(new User_Role() { RoleId = item });
                 }
-                authenService.CreatePasswordHash(model.Password, out byte[] passwordHash, out byte[] passwordSalt);
-                var temp = new User()
+                AuthenService.CreatePasswordHash(Model.Password, out byte[] PasswordHash, out byte[] PasswordSalt);
+                var User = new User()
                 {
-                    Username = model.Username,
-                    PasswordHash = passwordHash,
-                    PasswordSalt = passwordSalt,
-                    user_Roles = list
+                    Username = Model.Username,
+                    PasswordHash = PasswordHash,
+                    PasswordSalt = PasswordSalt,
+                    User_Roles = list
                 };
-                userService.Add(temp);
-                return Ok(temp);
+                UserService.Add(User);
+                return Ok(User);
             }
         }
         [HttpPost]
         [Route ("Refresh-token")]
-        public IActionResult RefreshToken([FromBody] LoginResponse model)
+        public IActionResult RefreshToken([FromBody] LoginResponse Model)
         {
-            var temp = authenService.GetPrincipalFromExpiredToken(model.AccessToken);
-            var user = userService.FindOne(c => c.Username.Equals(temp.Identity.Name));
-            if(user == null)
+            var Claims = AuthenService.GetPrincipalFromExpiredToken(Model.AccessToken);
+            var User = UserService.FindOne(c => c.Username.Equals(Claims.Identity.Name));
+            if(User == null)
             {
                 ModelState.AddModelError("Accesstoken", "Accesstoken error");
                 return BadRequest(ModelState);
             }
             else 
             {
-                var refreshtoken = RefreshTokenService.FindOne(c => c.userID == user.Id);
-                if (refreshtoken == null)
+                var Refreshtoken = RefreshTokenService.FindOne(c => c.UserID == User.Id);
+                if (Refreshtoken == null)
                 {
                     return BadRequest("Invalid refresh token");
-                } else if (!refreshtoken.refreshToken.Equals(model.RefreshToken))
+                } else if (!Refreshtoken.refreshToken.Equals(Model.RefreshToken))
                 {
                     return BadRequest("Invalid refresh token");
-                } else if(refreshtoken.Expires < DateTime.UtcNow)
+                } else if(Refreshtoken.Expires < DateTime.UtcNow)
                 {
                     return BadRequest("Expired time");
                 }
                 else
                 {
-                    return Ok(new LoginResponse() { AccessToken = authenService.CreateToken(temp.Claims.ToList()),RefreshToken =model.RefreshToken});
+                    return Ok(new LoginResponse() { AccessToken = AuthenService.CreateToken(Claims.Claims.ToList()),RefreshToken =Model.RefreshToken});
                 }  
             }
         }
         [HttpPut]
         [Authorize]
         [Route ("Change-password")]
-        public IActionResult RefreshToken([FromBody] ChangePasswordRequest model)
+        public IActionResult ChangePassword([FromBody] ChangePasswordRequest Model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var temp = userService.FindOne(c => c.Username.Equals(User.Identity.Name));
-            if (!authenService.VerifyPasswordHash(model.oldPassword, temp.PasswordHash, temp.PasswordSalt))
+            var Users = UserService.FindOne(c => c.Username.Equals(User.Identity.Name));
+            if (!AuthenService.VerifyPasswordHash(Model.OldPassword, Users.PasswordHash, Users.PasswordSalt))
             {
                 ModelState.AddModelError("Password", "Mật khẩu không đúng");
                 return BadRequest(ModelState);
             }
-            else if (!model.newPassword.Equals(model.rePassword))
+            else if (!Model.NewPassword.Equals(Model.RePassword))
             {
                 ModelState.AddModelError("RePassword", "Nhập lại mật khẩu không đúng");
                 return BadRequest(ModelState);
             }
             else
             {
-                authenService.CreatePasswordHash(model.newPassword, out byte[] passwordHash, out byte[] passwordSalt);
-                temp.PasswordHash=passwordHash;
-                temp.PasswordSalt=passwordSalt;
-                return Ok(userService.Update(temp));
+                AuthenService.CreatePasswordHash(Model.NewPassword, out byte[] PasswordHash, out byte[] PasswordSalt);
+                Users.PasswordHash=PasswordHash;
+                Users.PasswordSalt=PasswordSalt;
+                return Ok(UserService.Update(Users));
             }
 
         }

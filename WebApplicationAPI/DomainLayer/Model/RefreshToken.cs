@@ -10,13 +10,13 @@ namespace DomainLayer.Model
     public class RefreshToken
     {
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
         [Required]
         public string refreshToken { get; set; }
         [Required]
-        public int userID { get; set; }
+        public int UserID { get; set; }
         [Required]
         public DateTime Expires { get; set; }
-        public User user { get; set; }
+        public User User { get; set; }
     }
 }

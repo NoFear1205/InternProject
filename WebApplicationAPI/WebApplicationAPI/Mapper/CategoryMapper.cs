@@ -11,21 +11,21 @@ namespace WebApplicationAPI.Mapper
             CreateMap<Category,CategoryView>()
                  .ForMember(
                 res => res.Id,
-                opt => opt.MapFrom(src => $"{src.ID }"))
+                opt => opt.MapFrom(src => $"{src.Id }"))
                 .ForMember(
-                res => res.name,
+                res => res.Name,
                 opt => opt.MapFrom(src => $"{src.Name}"));
             CreateMap<CategoryAdd, Category>()
                 .ForMember(
                 res => res.Name,
-                opt => opt.MapFrom(src => $"{src.name}"));
+                opt => opt.MapFrom(src => $"{src.Name}"));
             CreateMap<CategoryView, Category>()
                  .ForMember(
-                res => res.ID,
+                res => res.Id,
                 opt => opt.MapFrom(src => $"{src.Id }"))
                 .ForMember(
                 res => res.Name,
-                opt => opt.MapFrom(src => $"{src.name}"));
+                opt => opt.MapFrom(src => $"{src.Name}"));
         }
     }
 }
