@@ -1,0 +1,54 @@
+﻿@page
+@model WebApplicationRazorPage.Pages.CategoryPages.IndexModel
+@{
+}
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary"> Category List</h2>
+        </div>
+        <div class="col-6">
+            @if(ViewData["Username"] != null)
+            {
+            <a asp-page="/CategoryPages/Create" class="btn btn-primary"><i class="bi bi-plus-circle"> Create New Category</i></a>
+            }
+        </div>
+        <form class="form-inline my-2 my-lg-0" method ="post">
+            <input class="form-control mr-sm-2" name="searchValue" type="search" placeholder="Search" aria-label="Search" value="">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                Mã loại hàng
+            </th>
+            <th>
+                Tên loại hàng
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model.list)
+        {
+            <tr>
+                <td width="33%">
+                    @obj.ID
+                </td>
+                <td width="33%">
+                    @obj.Name
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-page="Update"   asp-route-id="@obj.ID"><i class="bi bi-pencil-square" style="margin-right:5px"> Edit </i></a>
+                     <a class="btn btn-primary" asp-page="Delete"   asp-route-id="@obj.ID"><i class="bi bi-pencil-square" style="margin-right:5px"> Delete </i></a>
+                 </td>
+            </tr>
+        }
+    </tbody>
+</table>

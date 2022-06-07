@@ -1,0 +1,31 @@
+﻿@page
+@model WebApplicationRazorPage.Pages.ProductPages.DeleteModel
+@{
+}
+<form method="post" asp-action="Delete">
+    <div class="border p-3 mt-4">
+        <div class ="row pb-2">
+            <h2 class="text-primary">Delete Product</h2>
+            <hr />
+        </div>
+        @*<div asp-validation-summary="All" class="text-danger"></div>*@
+        <label asp-for="@Model.product.Id" ></label>
+        <input name ="Id" value="@Model.product.Id"  class="form-control" />
+        <div class="mb-3">
+            <label >Tên sản phẩm</label>
+            <label class="form-control" >@Model.product.Name</label> 
+        </div> 
+        <div class="mb-3">
+            <label >Tên nhà cung cấp</label>
+            <label class="form-control" >@Model.product.Provider</label> 
+        </div> 
+        <div class="mb-3">
+            <label >Tên thể loại</label>
+            <label class="form-control" >@Model.product.CategoryName</label> 
+        </div>  
+        <button type="submit" class="btn btn-primary" style="width:150px">Delete</button>
+        <a asp-page="/ProductPages/Index" class="btn btn-secondary" style="width:150px">
+            Back to list
+        </a>
+    </div>
+</form>

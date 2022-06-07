@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationAPI", "WebApplicationAPI\WebApplicationAPI.csproj", "{B92489B1-465F-4763-A036-53F6B52EFBA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationAPI", "WebApplicationAPI\WebApplicationAPI.csproj", "{B92489B1-465F-4763-A036-53F6B52EFBA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryLayer", "RepositoryLayer\RepositoryLayer.csproj", "{48506337-9191-4F44-83E5-67689907EE84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryLayer", "RepositoryLayer\RepositoryLayer.csproj", "{48506337-9191-4F44-83E5-67689907EE84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{8D6D0E56-B6E9-44A5-AD19-9E9A8CFD4CFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{8D6D0E56-B6E9-44A5-AD19-9E9A8CFD4CFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainLayer", "DomainLayer\DomainLayer.csproj", "{EB3AB208-5336-4A03-8487-37F13CE11422}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainLayer", "DomainLayer\DomainLayer.csproj", "{EB3AB208-5336-4A03-8487-37F13CE11422}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationRazorPage", "WebApplicationRazorPage\WebApplicationRazorPage.csproj", "{59772D9F-7BBD-4945-A970-72FE604373C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{EB3AB208-5336-4A03-8487-37F13CE11422}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB3AB208-5336-4A03-8487-37F13CE11422}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB3AB208-5336-4A03-8487-37F13CE11422}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59772D9F-7BBD-4945-A970-72FE604373C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59772D9F-7BBD-4945-A970-72FE604373C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59772D9F-7BBD-4945-A970-72FE604373C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59772D9F-7BBD-4945-A970-72FE604373C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

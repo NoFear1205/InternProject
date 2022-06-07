@@ -1,0 +1,22 @@
+﻿@page
+@model WebApplicationRazorPage.Pages.CategoryPages.UpdateModel
+@{
+}
+<form method="post" asp-action="Update">
+    <div class="border p-3 mt-4">
+        <div class ="row pb-2">
+            <h2 class="text-primary">Edit Category</h2>
+            <hr />
+        </div>
+        @*<div asp-validation-summary="All" class="text-danger"></div>*@
+        <input name="Id" value="@Model.category.ID" class="form-control" type="hidden" />
+        <div class="mb-3">
+            <label >Tên thể loại</label>
+            <input name="name" value="@Model.category.Name" class="form-control" />       
+        </div>        
+        <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+        <a asp-page="/CategoryPages/Index" class="btn btn-secondary" style="width:150px">
+            Back to list
+        </a>
+    </div>
+</form>

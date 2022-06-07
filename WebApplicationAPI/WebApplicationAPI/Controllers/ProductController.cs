@@ -21,7 +21,7 @@ namespace WebApplicationAPI.Controllers
             this.mapper= mapper;
         }
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] ProductAdd model)
+        public IActionResult Add([FromBody] ProductAdd model)
         {
             //var temp = _mapper.Map<Category>(model);
             if (ModelState.IsValid)
@@ -36,7 +36,7 @@ namespace WebApplicationAPI.Controllers
         [Route("Pagination")]
         public IActionResult Paging(int page, string? searchValue = "", int pageSize = 0)
         {
-            if (pageSize == 0)
+            if (pageSize <= 0)
                 pageSize = 10;
             if (page <= 0)
             {

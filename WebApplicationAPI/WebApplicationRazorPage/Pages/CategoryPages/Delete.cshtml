@@ -1,0 +1,23 @@
+﻿@page
+@model WebApplicationRazorPage.Pages.CategoryPages.DeleteModel
+@{
+}
+<form method="post" asp-action="Delete">
+    <div class="border p-3 mt-4">
+        <div class ="row pb-2">
+            <h2 class="text-primary">Delete Category</h2>
+            <hr />
+        </div>
+        @*<div asp-validation-summary="All" class="text-danger"></div>*@
+        <label >Mã thể loại</label>
+        <input name="Id" value="@Model.category.ID"  class="form-control" />
+        <div class="mb-3">
+            <label >Tên thể loại</label>
+            <label class="form-control" >@Model.category.Name</label> 
+        </div>        
+        <button type="submit" class="btn btn-primary" style="width:150px">Delete</button>
+        <a asp-page="/CategoryPages/Index" class="btn btn-secondary" style="width:150px">
+            Back to list
+        </a>
+    </div>
+</form>

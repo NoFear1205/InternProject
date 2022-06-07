@@ -1,0 +1,20 @@
+﻿@page
+@model WebApplicationRazorPage.Pages.CategoryPages.CreateModel
+@{
+}
+<form method="post" asp-action="Update">
+    <div class="border p-3 mt-4">
+        <div class ="row pb-2">
+            <h2 class="text-primary">Create Category</h2>
+        </div>
+        @*<div asp-validation-summary="All" class="text-danger"></div>*@
+        <div class="mb-3">
+            <label>Tên loại sản phẩm</label>
+            <input name="name" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+        <a asp-page="/CategoryPages/Index" class="btn btn-secondary" style="width:150px">
+            Back to list
+        </a>
+    </div>
+</form>
