@@ -30,13 +30,13 @@ namespace WebApplicationAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var temp = UserService.FindOne(c => c.Username.Contains(Model.Username));
-            if (temp == null)
+            var User = UserService.FindOne(c => c.Username.Contains(Model.Username));
+            if (User == null)
             {
                 ModelState.AddModelError("Username", "Username không tồn tại");
                 return BadRequest(ModelState);
             }
-            else if (!AuthenService.VerifyPasswordHash(Model.Password, temp.PasswordHash, temp.PasswordSalt))
+            else if (!AuthenService.VerifyPasswordHash(Model.Password, User.PasswordHash, User.PasswordSalt))
             {
                 ModelState.AddModelError("Password", "Password không đúng");
                 return BadRequest(ModelState);
@@ -45,30 +45,30 @@ namespace WebApplicationAPI.Controllers
             {
                 List<Claim> claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, temp.Username)
+                    new Claim(ClaimTypes.Name, User.Username)
                 };
-                var list = UserRolerService.FindList(c => c.UserId == temp.Id, "Roles");
+                var list = UserRolerService.FindList(c => c.UserId == User.Id, "Roles");
                 foreach (var item in list)
                 {
                     claims.Add(new Claim(ClaimTypes.Role, item.Roles.Name));
                 };
-                var refresh = AuthenService.GenerateRefreshToken(temp.Id);
-                var OldRefreshToken = RefreshTokenService.FindOne(c => c.UserID == temp.Id);
+                var NewRefreshToken = AuthenService.GenerateRefreshToken(User.Id);
+                var OldRefreshToken = RefreshTokenService.FindOne(c => c.UserID == User.Id);
                 if (OldRefreshToken == null)
                 {
-                    RefreshTokenService.Add(refresh);
+                    RefreshTokenService.Add(NewRefreshToken);
                 }
                 else
                 {
-                    OldRefreshToken.refreshToken = refresh.refreshToken;
-                    OldRefreshToken.Expires = refresh.Expires;
+                    OldRefreshToken.refreshToken = NewRefreshToken.refreshToken;
+                    OldRefreshToken.Expires = NewRefreshToken.Expires;
                     RefreshTokenService.Update(OldRefreshToken);
                 }
                 
                 return Ok(new LoginResponse
                 {
                     AccessToken = AuthenService.CreateToken(claims),
-                    RefreshToken = refresh.refreshToken
+                    RefreshToken = NewRefreshToken.refreshToken
                 });
             }
         }
@@ -92,10 +92,10 @@ namespace WebApplicationAPI.Controllers
             }
             else
             {
-                List<User_Role> list = new List<User_Role>();
+                List<User_Role> ListUserRole = new List<User_Role>();
                 foreach (var item in Model.Roles)
                 {
-                    list.Add(new User_Role() { RoleId = item });
+                    ListUserRole.Add(new User_Role() { RoleId = item });
                 }
                 AuthenService.CreatePasswordHash(Model.Password, out byte[] PasswordHash, out byte[] PasswordSalt);
                 var User = new User()
@@ -103,7 +103,7 @@ namespace WebApplicationAPI.Controllers
                     Username = Model.Username,
                     PasswordHash = PasswordHash,
                     PasswordSalt = PasswordSalt,
-                    User_Roles = list
+                    User_Roles = ListUserRole
                 };
                 UserService.Add(User);
                 return Ok(User);
