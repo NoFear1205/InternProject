@@ -8,10 +8,7 @@
             <h2 class="text-primary"> Category List</h2>
         </div>
         <div class="col-6">
-            @if(ViewData["Username"] != null)
-            {
             <a asp-page="/CategoryPages/Create" class="btn btn-primary"><i class="bi bi-plus-circle"> Create New Category</i></a>
-            }
         </div>
         <form class="form-inline my-2 my-lg-0" method ="post">
             <input class="form-control mr-sm-2" name="searchValue" type="search" placeholder="Search" aria-label="Search" value="">

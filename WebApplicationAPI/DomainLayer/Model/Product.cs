@@ -12,8 +12,6 @@ namespace DomainLayer.Model
         public int Id { get;private set; }
         [Display(Name ="Tên sản phẩm")]
         public string? Name { get; private set; }
-        /*[Required(ErrorMessage = "Tên nhà cung cấp không được để trống")]
-        [StringLength(100)]*/
         [Display(Name = "Tên nhà cung cấp")]
         public string? Provider { get; private set; }       
         public int CategoryID { get; private set; }
@@ -36,9 +34,9 @@ namespace DomainLayer.Model
         {
             CategoryID = CategoryId;
         }
-        public void setCategoryId(List<Category> Category)
+        public void setCategoryId(Category Category)
         {
-            Category = Category;
+            this.Category = Category;
         }
 
 

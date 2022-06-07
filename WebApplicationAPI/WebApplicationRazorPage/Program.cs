@@ -21,9 +21,6 @@ builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
 builder.Services.AddScoped<IAuthenService, AuthenciationService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddSession(options => {
-    options.IdleTimeout = TimeSpan.FromMinutes(30);
-});
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -38,7 +35,6 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseSession();
 
 app.UseAuthorization();
 

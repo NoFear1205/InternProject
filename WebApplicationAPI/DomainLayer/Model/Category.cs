@@ -10,9 +10,6 @@ namespace DomainLayer.Model
     public class Category
     {
         public int ID { get; private set; }
-        //[Required(ErrorMessage = "Tên loại sản phẩm không được để trống")]
-        [Display(Name = "Tên Loại sản phẩm")]
-        //[MaxLength(30)]
         public string? Name { get; private set; }
         public List<Product>? Products { get; private set; }
         public Category() { }
