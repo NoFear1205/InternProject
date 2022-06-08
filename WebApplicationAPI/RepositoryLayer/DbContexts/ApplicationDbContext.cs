@@ -15,18 +15,22 @@ namespace RepositoryLayer.DbContexts
         public ApplicationDbContext(DbContextOptions con) : base(con)
         {
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder Builder)
         {
             //Config Entity role
-            new RoleEntityConfig().Configure(modelBuilder.Entity<Role>());
+            new RoleEntityConfig().Configure(Builder.Entity<Role>());
+            
             //Config Entity User
-            new UserEntityConfig().Configure(modelBuilder.Entity<User>());
+            new UserEntityConfig().Configure(Builder.Entity<User>());
+            
             //Config Entity Product
-            new ProductEntityTypeConfig().Configure(modelBuilder.Entity<Product>());
+            new ProductEntityTypeConfig().Configure(Builder.Entity<Product>());
+            
             //Config Entity Category
-            new CategoryEntityConfig().Configure(modelBuilder.Entity<Category>());
+            new CategoryEntityConfig().Configure(Builder.Entity<Category>());
+
             //Config Entity User_Role
-            new UserRoleEntityConfig().Configure(modelBuilder.Entity<UserRole>());
+            new UserRoleEntityConfig().Configure(Builder.Entity<UserRole>());
         }                
         public DbSet<Role> Role { get; set; }
         public DbSet<User> Users { get; set; }

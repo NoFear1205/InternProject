@@ -11,11 +11,11 @@ namespace RepositoryLayer.DbContexts.ConfigEntityType
 {
     public class ResfreshTokenEntityConfig : IEntityTypeConfiguration<RefreshToken>
     {
-        public void Configure(EntityTypeBuilder<RefreshToken> builder)
+        public void Configure(EntityTypeBuilder<RefreshToken> Builder)
         {
-            builder.HasKey(sc => sc.Id);
+            Builder.HasKey(sc => sc.Id);
 
-            builder
+            Builder
                 .HasOne<User>(sc => sc.User)
                 .WithMany(s => s.RefreshToken)
                 .HasForeignKey(sc => sc.UserID);

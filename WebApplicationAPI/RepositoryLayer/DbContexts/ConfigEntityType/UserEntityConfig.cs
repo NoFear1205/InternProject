@@ -11,13 +11,13 @@ namespace RepositoryLayer.DbContexts.ConfigEntityType
 {
     public class UserEntityConfig : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<User> Builder)
         {
-            builder.HasKey(c => c.Id);
-            builder.Property(c => c.Username).IsRequired().HasMaxLength(30);
-            builder.HasIndex(c => c.Username).IsUnique();
-            builder.Property(c => c.PasswordHash).IsRequired();
-            builder.Property(c => c.PasswordSalt).IsRequired();
+            Builder.HasKey(c => c.Id);
+            Builder.Property(c => c.Username).IsRequired().HasMaxLength(30);
+            Builder.HasIndex(c => c.Username).IsUnique();
+            Builder.Property(c => c.PasswordHash).IsRequired();
+            Builder.Property(c => c.PasswordSalt).IsRequired();
         }
     }
 }

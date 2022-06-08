@@ -11,11 +11,11 @@ namespace RepositoryLayer.DbContexts.ConfigEntityType
 {
     public class RoleEntityConfig : IEntityTypeConfiguration<Role>
     {
-        public void Configure(EntityTypeBuilder<Role> builder)
+        public void Configure(EntityTypeBuilder<Role> Builder)
         {
-            builder.HasKey(c => c.Id);
-            builder.Property(c => c.Name).IsRequired();
-            builder.HasIndex(c => c.Name).IsUnique();
+            Builder.HasKey(c => c.Id);
+            Builder.Property(c => c.Name).IsRequired();
+            Builder.HasIndex(c => c.Name).IsUnique();
         }
     }
 }

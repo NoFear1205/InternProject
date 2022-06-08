@@ -10,17 +10,17 @@ namespace RepositoryLayer.DbContexts.ConfigEntityType
 {
     public class UserRoleEntityConfig
     {
-        public void Configure(EntityTypeBuilder<UserRole> builder)
+        public void Configure(EntityTypeBuilder<UserRole> Builder)
         {
-            builder.HasKey(sc => new { sc.RoleId, sc.UserId });
+            Builder.HasKey(sc => new { sc.RoleId, sc.UserId });
 
-            builder
+            Builder
                 .HasOne<User>(sc => sc.Users)
-                .WithMany(s => s.User_Roles)
+                .WithMany(s => s.UserRoles)
                 .HasForeignKey(sc => sc.UserId);
-            builder
+            Builder
                 .HasOne<Role>(sc => sc.Roles)
-                .WithMany(s => s.User_Roles)
+                .WithMany(s => s.UserRoles)
                 .HasForeignKey(sc => sc.RoleId);
         }
     }

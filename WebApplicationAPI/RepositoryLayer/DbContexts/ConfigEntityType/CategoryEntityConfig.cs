@@ -11,10 +11,10 @@ namespace RepositoryLayer.DbContextLayer
 {
     public class CategoryEntityConfig : IEntityTypeConfiguration<Category>
     {
-        public void Configure(EntityTypeBuilder<Category> modelBuilder)
+        public void Configure(EntityTypeBuilder<Category> Builder)
         {
-            modelBuilder.HasKey(c=>c.Id);
-            modelBuilder.Property(c=>c.Name).HasMaxLength(30).IsRequired();
+            Builder.HasKey(c=>c.Id);
+            Builder.Property(c=>c.Name).HasMaxLength(30).IsRequired();
             //modelBuilder.Ignore(x => x.Products);
         }
     }

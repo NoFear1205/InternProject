@@ -28,13 +28,13 @@ namespace ServiceLayer.Implentation
         {
             var Key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
                 config.GetSection("AppSettings:Token").Value));
+
             var Credentials = new SigningCredentials(Key, SecurityAlgorithms.HmacSha512Signature);
 
             var token = new JwtSecurityToken(
                 claims: Claims,
                 notBefore: DateTime.UtcNow,
                 expires: DateTime.UtcNow.AddMinutes(1),
-
                 signingCredentials: Credentials);
             var Token = new JwtSecurityTokenHandler().WriteToken(token);
             return Token;
@@ -79,8 +79,8 @@ namespace ServiceLayer.Implentation
         }
         public ClaimsPrincipal? GetPrincipalFromExpiredToken(string? Token)
         {
-            ClaimsPrincipal principal;
-            var tokenValidationParameters = new TokenValidationParameters
+            ClaimsPrincipal Principal;
+            var TokenValidationParameters = new TokenValidationParameters
             {
                 ValidateAudience = false,
                 ValidateIssuer = false,
@@ -89,9 +89,9 @@ namespace ServiceLayer.Implentation
                 ValidateLifetime = false
             };
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            principal = tokenHandler.ValidateToken(Token, tokenValidationParameters, out SecurityToken securityToken);
-            return principal;
+            var TokenHandler = new JwtSecurityTokenHandler();
+            Principal = TokenHandler.ValidateToken(Token, TokenValidationParameters, out SecurityToken SecurityToken);
+            return Principal;
 
         }
     }

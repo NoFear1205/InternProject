@@ -103,7 +103,7 @@ namespace WebApplicationAPI.Controllers
                     Username = Model.Username,
                     PasswordHash = PasswordHash,
                     PasswordSalt = PasswordSalt,
-                    User_Roles = ListUserRole
+                    UserRoles = ListUserRole
                 };
                 userService.Add(User);
                 return Ok(User);
