@@ -49,6 +49,7 @@ builder.Services.AddScoped<IBaseRepository<Category>, BaseRepository<Category>>(
 builder.Services.AddScoped<IBaseRepository<Product>, BaseRepository<Product>>();
 builder.Services.AddScoped<IBaseRepository<User>, BaseRepository<User>>();
 builder.Services.AddScoped<IBaseRepository<UserRole>, BaseRepository<UserRole>>();
+builder.Services.AddScoped<IBaseRepository<Role>, BaseRepository<Role>>();
 builder.Services.AddScoped<IBaseRepository<RefreshToken>, BaseRepository<RefreshToken>>();
 
 //DI Service
@@ -56,6 +57,7 @@ builder.Services.AddScoped<IBaseService<Category>, BaseService<Category>>();
 builder.Services.AddScoped<IBaseService<Product>, BaseService<Product>>();
 builder.Services.AddScoped<IBaseService<User>, BaseService<User>>();
 builder.Services.AddScoped<IBaseService<UserRole>, BaseService<UserRole>>();
+builder.Services.AddScoped<IBaseService<Role>, BaseService<Role>>();
 builder.Services.AddScoped<IBaseService<RefreshToken>, BaseService<RefreshToken>>();
 builder.Services.AddScoped<IAuthenService, AuthenciationService>();
 var app = builder.Build();

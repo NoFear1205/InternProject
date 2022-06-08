@@ -98,13 +98,11 @@ namespace WebApplicationAPI.Controllers
                     ListUserRole.Add(new UserRole() { RoleId = item });
                 }
                 authenService.CreatePasswordHash(Model.Password, out byte[] PasswordHash, out byte[] PasswordSalt);
-                var User = new User()
-                {
-                    Username = Model.Username,
-                    PasswordHash = PasswordHash,
-                    PasswordSalt = PasswordSalt,
-                    UserRoles = ListUserRole
-                };
+                var User = new User();
+                User.SetUsername(Model.Username);
+                User.SetPasswordHash(PasswordHash);
+                User.SetPasswordSalt(PasswordSalt);
+                User.SetUserRoles(ListUserRole);    
                 userService.Add(User);
                 return Ok(User);
             }
@@ -162,8 +160,8 @@ namespace WebApplicationAPI.Controllers
             else
             {
                 authenService.CreatePasswordHash(Model.NewPassword, out byte[] PasswordHash, out byte[] PasswordSalt);
-                Users.PasswordHash=PasswordHash;
-                Users.PasswordSalt=PasswordSalt;
+                Users.SetPasswordHash(PasswordHash);
+                Users.SetPasswordSalt(PasswordSalt);
                 return Ok(userService.Update(Users));
             }
 

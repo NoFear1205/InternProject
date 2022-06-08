@@ -18,27 +18,25 @@ namespace DomainLayer.Model
         [Display(Name = "Loại sản phẩm")]
         public Category? Category { get; private set; }
         public Product() { }
-        public void setName (string Name)
+        public void SetName (string Name)
         {
             this.Name = Name;
         }
-        public void setProvider(string Provider)
+        public void SetProvider(string Provider)
         {
             this.Provider = Provider;
         }
-        public void setId(int Id)
+        public void SetId(int Id)
         {
             this.Id = Id;
         }
-        public void setCategoryId(int CategoryId)
+        public void SetCategoryId(int CategoryId)
         {
             CategoryID = CategoryId;
         }
-        public void setCategoryId(Category Category)
+        public void SetCategoryId(Category Category)
         {
             this.Category = Category;
         }
-
-
     }
 }
