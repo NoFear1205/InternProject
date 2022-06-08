@@ -12,10 +12,10 @@ namespace WebApplicationAPI.Controllers
     public class AuthenciationController : Controller
     {
         private readonly IBaseService<User> UserService;
-        private readonly IBaseService<User_Role> UserRolerService;
+        private readonly IBaseService<UserRole> UserRolerService;
         private readonly IBaseService<RefreshToken> RefreshTokenService;
         private readonly IAuthenService AuthenService;
-        public AuthenciationController(IBaseService<User> UserService, IAuthenService AuthenService, IBaseService<User_Role> UserRolerService, IBaseService<RefreshToken> RefreshTokenService)
+        public AuthenciationController(IBaseService<User> UserService, IAuthenService AuthenService, IBaseService<UserRole> UserRolerService, IBaseService<RefreshToken> RefreshTokenService)
         {
             this.UserService = UserService;
             this.AuthenService = AuthenService;
@@ -92,10 +92,10 @@ namespace WebApplicationAPI.Controllers
             }
             else
             {
-                List<User_Role> ListUserRole = new List<User_Role>();
+                List<UserRole> ListUserRole = new List<UserRole>();
                 foreach (var item in Model.Roles)
                 {
-                    ListUserRole.Add(new User_Role() { RoleId = item });
+                    ListUserRole.Add(new UserRole() { RoleId = item });
                 }
                 AuthenService.CreatePasswordHash(Model.Password, out byte[] PasswordHash, out byte[] PasswordSalt);
                 var User = new User()

@@ -41,9 +41,23 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDbContext<ApplicationDbContext>(con => con.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
-builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
-builder.Services.AddScoped<IAuthenService,AuthenciationService>();
+//builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+//builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
+
+//DI Repository
+builder.Services.AddScoped<IBaseRepository<Category>, BaseRepository<Category>>();
+builder.Services.AddScoped<IBaseRepository<Product>, BaseRepository<Product>>();
+builder.Services.AddScoped<IBaseRepository<User>, BaseRepository<User>>();
+builder.Services.AddScoped<IBaseRepository<UserRole>, BaseRepository<UserRole>>();
+builder.Services.AddScoped<IBaseRepository<RefreshToken>, BaseRepository<RefreshToken>>();
+
+//DI Service
+builder.Services.AddScoped<IBaseService<Category>, BaseService<Category>>();
+builder.Services.AddScoped<IBaseService<Product>, BaseService<Product>>();
+builder.Services.AddScoped<IBaseService<User>, BaseService<User>>();
+builder.Services.AddScoped<IBaseService<UserRole>, BaseService<UserRole>>();
+builder.Services.AddScoped<IBaseService<RefreshToken>, BaseService<RefreshToken>>();
+builder.Services.AddScoped<IAuthenService, AuthenciationService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

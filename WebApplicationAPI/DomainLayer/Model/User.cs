@@ -12,7 +12,7 @@ namespace DomainLayer.Model
         public string Username { get;  set; }
         public byte[] PasswordHash { get;  set; }
         public byte[] PasswordSalt { get;  set; }
-        public List<User_Role>? User_Roles { get;  set; }
+        public List<UserRole>? User_Roles { get;  set; }
         public IList<RefreshToken>? RefreshToken { get;  set; }
     }
 }

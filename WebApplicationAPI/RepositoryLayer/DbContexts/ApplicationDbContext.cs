@@ -26,12 +26,12 @@ namespace RepositoryLayer.DbContexts
             //Config Entity Category
             new CategoryEntityConfig().Configure(modelBuilder.Entity<Category>());
             //Config Entity User_Role
-            new UserRoleEntityConfig().Configure(modelBuilder.Entity<User_Role>());
+            new UserRoleEntityConfig().Configure(modelBuilder.Entity<UserRole>());
         }                
         public DbSet<Role> Role { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<User_Role> User_Role { get; set; }
+        public DbSet<UserRole> User_Role { get; set; }
     }
 }

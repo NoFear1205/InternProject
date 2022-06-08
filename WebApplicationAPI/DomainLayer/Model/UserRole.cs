@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Model
 {
-    public class User_Role
+    public class UserRole
     {
         public int UserId { get; set; }
         public User Users { get;  set; }

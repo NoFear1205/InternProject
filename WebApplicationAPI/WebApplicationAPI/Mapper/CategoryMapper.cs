@@ -8,24 +8,10 @@ namespace WebApplicationAPI.Mapper
     {
         public CategoryMapper()
         {
-            CreateMap<Category,CategoryView>()
-                 .ForMember(
-                res => res.Id,
-                opt => opt.MapFrom(src => $"{src.Id }"))
-                .ForMember(
-                res => res.Name,
-                opt => opt.MapFrom(src => $"{src.Name}"));
-            CreateMap<CategoryAdd, Category>()
-                .ForMember(
-                res => res.Name,
-                opt => opt.MapFrom(src => $"{src.Name}"));
-            CreateMap<CategoryView, Category>()
-                 .ForMember(
-                res => res.Id,
-                opt => opt.MapFrom(src => $"{src.Id }"))
-                .ForMember(
-                res => res.Name,
-                opt => opt.MapFrom(src => $"{src.Name}"));
+            CreateMap<Category, CategoryView>();
+            CreateMap<CategoryView, Category>();
+            CreateMap<CategoryAdd, Category>();
+
         }
     }
 }

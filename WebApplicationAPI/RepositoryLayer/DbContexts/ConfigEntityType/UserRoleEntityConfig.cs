@@ -10,7 +10,7 @@ namespace RepositoryLayer.DbContexts.ConfigEntityType
 {
     public class UserRoleEntityConfig
     {
-        public void Configure(EntityTypeBuilder<User_Role> builder)
+        public void Configure(EntityTypeBuilder<UserRole> builder)
         {
             builder.HasKey(sc => new { sc.RoleId, sc.UserId });
 
