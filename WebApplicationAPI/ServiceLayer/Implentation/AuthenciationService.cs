@@ -16,68 +16,68 @@ namespace ServiceLayer.Implentation
 {
     public class AuthenciationService : IAuthenService
     {
-        private readonly IConfiguration _config;
-        private readonly IBaseRepository<RefreshToken> _refresh;
+        private readonly IConfiguration config;
+        private readonly IBaseRepository<RefreshToken> refresh;
 
         public AuthenciationService(IConfiguration config, IBaseRepository<RefreshToken> refresh)
         {
-            _config = config;
-            _refresh = refresh;
+            this.config = config;
+            this.refresh = refresh;
         }
-        public string CreateToken(List<Claim> claims)
+        public string CreateToken(List<Claim> Claims)
         {
-            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
-                _config.GetSection("AppSettings:Token").Value));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            var Key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
+                config.GetSection("AppSettings:Token").Value));
+            var Credentials = new SigningCredentials(Key, SecurityAlgorithms.HmacSha512Signature);
 
             var token = new JwtSecurityToken(
-                claims: claims,
+                claims: Claims,
                 notBefore: DateTime.UtcNow,
                 expires: DateTime.UtcNow.AddMinutes(1),
 
-                signingCredentials: creds);
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-            return jwt;
+                signingCredentials: Credentials);
+            var Token = new JwtSecurityTokenHandler().WriteToken(token);
+            return Token;
         }
-        public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        public void CreatePasswordHash(string Password, out byte[] PasswordHash, out byte[] PasswordSalt)
         {
             using (var hmac = new HMACSHA512())
             {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                PasswordSalt = hmac.Key;
+                PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Password));
             }
         }
-        public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        public bool VerifyPasswordHash(string Password, byte[] PasswordHash, byte[] PasswordSalt)
         {
-            using (var hmac = new HMACSHA512(passwordSalt))
+            using (var hmac = new HMACSHA512(PasswordSalt))
             {
-                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                return computedHash.SequenceEqual(passwordHash);
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Password));
+                return computedHash.SequenceEqual(PasswordHash);
             }
         }
-        public RefreshToken GenerateRefreshToken(int userId)
+        public RefreshToken GenerateRefreshToken(int UserId)
         {
-            var randomNumber = new byte[32];
+            var RandomNumber = new byte[32];
             using (var rng = RandomNumberGenerator.Create())
             {
-                rng.GetBytes(randomNumber);
+                rng.GetBytes(RandomNumber);
                 return new RefreshToken()
                 {
-                    refreshToken = Convert.ToBase64String(randomNumber),
-                    UserID = userId,
+                    refreshToken = Convert.ToBase64String(RandomNumber),
+                    UserID = UserId,
                     Expires = DateTime.UtcNow.AddMinutes(10)
                 };
             }
         }
-        public bool AddRefreshToken(RefreshToken model)
+        public bool AddRefreshToken(RefreshToken Model)
         {
-            return _refresh.Add(model);
+            return refresh.Add(Model);
         }
-        public bool UpdateRefreshToken(RefreshToken model)
+        public bool UpdateRefreshToken(RefreshToken Model)
         {
-            return _refresh.Update(model);
+            return refresh.Update(Model);
         }
-        public ClaimsPrincipal? GetPrincipalFromExpiredToken(string? token)
+        public ClaimsPrincipal? GetPrincipalFromExpiredToken(string? Token)
         {
             ClaimsPrincipal principal;
             var tokenValidationParameters = new TokenValidationParameters
@@ -85,12 +85,12 @@ namespace ServiceLayer.Implentation
                 ValidateAudience = false,
                 ValidateIssuer = false,
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value)),
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.GetSection("AppSettings:Token").Value)),
                 ValidateLifetime = false
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
+            principal = tokenHandler.ValidateToken(Token, tokenValidationParameters, out SecurityToken securityToken);
             return principal;
 
         }

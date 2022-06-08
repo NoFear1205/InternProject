@@ -12,44 +12,44 @@ namespace ServiceLayer.Implentation
 {
     public class BaseService<T> : IBaseService<T> where T : class
     {
-        private readonly IBaseRepository<T> BaseRepository;
+        private readonly IBaseRepository<T> baseRepository;
         public BaseService(IBaseRepository<T> BaseRepository)
         {
-            this.BaseRepository = BaseRepository;
+            this.baseRepository = BaseRepository;
         }
         public bool Add(T Model)
         {
-            return BaseRepository.Add(Model);
+            return baseRepository.Add(Model);
         }
 
         public bool Delete(T Model)
         {
-            return BaseRepository.Delete(Model);
+            return baseRepository.Delete(Model);
         }
 
         public List<T> FindList(Expression<Func<T, bool>> Predicate,string? Incudes)
         {
-            return BaseRepository.FindList(Predicate, Incudes); 
+            return baseRepository.FindList(Predicate, Incudes); 
         }
 
         public T? FindOne(Expression<Func<T, bool>> Predicate, string? Incudes = null)
         {
-            return (T?)BaseRepository.FindOne(Predicate, Incudes);
+            return (T?)baseRepository.FindOne(Predicate, Incudes);
         }
 
         public List<T> Get()
         {
-            return BaseRepository.Get();
+            return baseRepository.Get();
         }
 
         public List<T> List(Expression<Func<T, bool>> Predicate, int Page, int PageSize, string? Incudes = null)
         {
-           return BaseRepository.List(Predicate, Page, PageSize, Incudes);
+           return baseRepository.List(Predicate, Page, PageSize, Incudes);
         }
 
         public bool Update(T Model)
         {
-            return BaseRepository.Update(Model);
+            return baseRepository.Update(Model);
         }
     }
 }

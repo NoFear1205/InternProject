@@ -13,12 +13,12 @@ namespace WebApplicationAPI.Controllers
     [Route("api/[controller]")]
     public class ProductController : Controller
     {
-        private readonly IBaseService<Product> ProductService;
-        private readonly IMapper Mapper;
+        private readonly IBaseService<Product> productService;
+        private readonly IMapper mapper;
         public ProductController(IBaseService<Product> ProductService, IMapper Mapper)
         {
-            this.ProductService= ProductService;
-            this.Mapper= Mapper;
+            this.productService= ProductService;
+            this.mapper= Mapper;
         }
         [HttpPost]
         public IActionResult Add([FromBody] ProductAdd Model)
@@ -26,7 +26,7 @@ namespace WebApplicationAPI.Controllers
             
             if (ModelState.IsValid)
             {
-                return Ok(ProductService.Add(Mapper.Map<Product>(Model)));
+                return Ok(productService.Add(mapper.Map<Product>(Model)));
             }
             return BadRequest(ModelState);
         }
@@ -41,10 +41,10 @@ namespace WebApplicationAPI.Controllers
                 Page = 1;
             }
             List<ProductView> ListProduct = new List<ProductView>();
-            var temp = ProductService.List(c => c.Name.Contains(SearchValue), Page, PageSize, "Category");
+            var temp = productService.List(c => c.Name.Contains(SearchValue), Page, PageSize, "Category");
             foreach(var item in temp)
             {
-                ListProduct.Add(Mapper.Map<ProductView>(item));
+                ListProduct.Add(mapper.Map<ProductView>(item));
             }
             return Ok(ListProduct);
         }
@@ -52,8 +52,8 @@ namespace WebApplicationAPI.Controllers
         [Route("Get-one")]
         public IActionResult GetOne(int Id)
         {
-            var Product = ProductService.FindOne(c => c.Id == Id, "Category");
-            return Ok(Mapper.Map<ProductView>(Product));
+            var Product = productService.FindOne(c => c.Id == Id, "Category");
+            return Ok(mapper.Map<ProductView>(Product));
         }
         [HttpDelete]
         [Route("Delete")]
@@ -61,10 +61,10 @@ namespace WebApplicationAPI.Controllers
         {
             foreach (var item in id)
             {
-                var Product = ProductService.FindOne(c => c.Id == item);
+                var Product = productService.FindOne(c => c.Id == item);
                 if (Product != null)
                 {
-                    ProductService.Delete(Product);
+                    productService.Delete(Product);
                 }
             }
             return Ok();
@@ -74,9 +74,9 @@ namespace WebApplicationAPI.Controllers
         public  IActionResult Update([FromBody] ProductUpdate Model)
         {
 
-            if (ProductService.FindOne(c => c.Id == Model.Id) != null)
+            if (productService.FindOne(c => c.Id == Model.Id) != null)
             {
-                return Ok(ProductService.Update(Mapper.Map<Product>(Model)));
+                return Ok(productService.Update(mapper.Map<Product>(Model)));
             }
             else return NotFound("No find record");
         }

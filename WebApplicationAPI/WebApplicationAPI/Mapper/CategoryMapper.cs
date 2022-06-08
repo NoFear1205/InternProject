@@ -11,7 +11,6 @@ namespace WebApplicationAPI.Mapper
             CreateMap<Category, CategoryView>();
             CreateMap<CategoryView, Category>();
             CreateMap<CategoryAdd, Category>();
-
         }
     }
 }

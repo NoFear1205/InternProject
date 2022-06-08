@@ -12,19 +12,19 @@ namespace WebApplicationAPI.Controllers
     [Authorize]
     public class CategoryController : Controller
     {
-        private readonly IBaseService<Category> CategoryService;
-        private readonly IMapper Mapper;
+        private readonly IBaseService<Category> categoryService;
+        private readonly IMapper mapper;
             public CategoryController(IBaseService<Category> CategoryService, IMapper Mapper)
         {
-            this.CategoryService = CategoryService;
-            this.Mapper = Mapper;
+            this.categoryService = CategoryService;
+            this.mapper = Mapper;
         }
         [HttpPost, Authorize(Roles = "Admin")]
         public IActionResult Add([FromBody] CategoryAdd Model)
         {
             if (ModelState.IsValid)
             {
-                  return Ok(CategoryService.Add(Mapper.Map<Category>(Model)));
+                  return Ok(categoryService.Add(mapper.Map<Category>(Model)));
             }
             return BadRequest(ModelState);
         }
@@ -39,9 +39,9 @@ namespace WebApplicationAPI.Controllers
                 Page = 1;
             }
             List<CategoryView> list = new List<CategoryView>();
-            foreach(var item in CategoryService.List(c => c.Name.Contains(SearchValue), Page, PageSize))
+            foreach(var item in categoryService.List(c => c.Name.Contains(SearchValue), Page, PageSize))
             {
-                list.Add(Mapper.Map<CategoryView>(item));
+                list.Add(mapper.Map<CategoryView>(item));
             }
             return Ok(list);
         }
@@ -49,9 +49,9 @@ namespace WebApplicationAPI.Controllers
         [Route("Get-one")]
         public IActionResult GetOne(int Id)
         {
-            var Category = CategoryService.FindOne(c => c.Id == Id);
+            var Category = categoryService.FindOne(c => c.Id == Id);
 
-             return Ok(Mapper.Map<CategoryView>(Category));   
+             return Ok(mapper.Map<CategoryView>(Category));   
         }
         [HttpDelete]
         [Route("Delete")]
@@ -59,10 +59,10 @@ namespace WebApplicationAPI.Controllers
         {
             foreach(var item in Id)
             {
-                var Category = CategoryService.FindOne(c => c.Id == item);
+                var Category = categoryService.FindOne(c => c.Id == item);
                 if (Category != null)
                 {
-                    CategoryService.Delete(Category);
+                    categoryService.Delete(Category);
                 }
             }
             return Ok("Delete record successfully");
@@ -72,9 +72,9 @@ namespace WebApplicationAPI.Controllers
         public IActionResult Update([FromBody] CategoryView Model)
         {
             
-            if (CategoryService.FindOne(c => c.Id == Model.Id) != null)
+            if (categoryService.FindOne(c => c.Id == Model.Id) != null)
             {
-                return Ok(CategoryService.Update(Mapper.Map<Category>(Model)));
+                return Ok(categoryService.Update(mapper.Map<Category>(Model)));
             }
             else return NotFound("No find record");
         }
