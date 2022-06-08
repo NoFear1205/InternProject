@@ -12,7 +12,7 @@ namespace WebApplicationRazorPage.Pages.ProductPages
     {
         private readonly IBaseService<Product> baseService;
         private readonly IMapper mapper;
-        public ProductAdd model { get; set; }
+        public ProductAddModel model { get; set; }
         public CreateModel(IBaseService<Product> baseService, IMapper mapper)
         {
             this.baseService = baseService;
@@ -22,7 +22,7 @@ namespace WebApplicationRazorPage.Pages.ProductPages
         {
         }
 
-        public IActionResult OnPost(ProductAdd model) 
+        public IActionResult OnPost(ProductAddModel model) 
         {
             baseService.Add(mapper.Map<Product>(model));
             return RedirectToPage("Index");

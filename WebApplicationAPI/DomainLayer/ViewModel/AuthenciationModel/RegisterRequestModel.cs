@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.ViewModel
 {
-    public class RegisterRequest
+    public class RegisterRequestModel
     {
         [Required]
         public string Username { get; set; }

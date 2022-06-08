@@ -22,7 +22,7 @@ namespace WebApplicationRazorPage.Pages.CategoryPages
             
         }
 
-        public IActionResult OnPost(CategoryAdd model) 
+        public IActionResult OnPost(CategoryAddModel model) 
         {
             baseService.Add(mapper.Map<Category>(model));
             return RedirectToPage("Index");

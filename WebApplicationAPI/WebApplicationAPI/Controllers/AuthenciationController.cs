@@ -24,7 +24,7 @@ namespace WebApplicationAPI.Controllers
         }
         [HttpPost]
         [Route("Login")]
-        public IActionResult Login([FromBody] LoginRequest Model)
+        public IActionResult Login([FromBody] LoginRequestModel Model)
         {
             if (!ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace WebApplicationAPI.Controllers
                     refreshTokenService.Update(OldRefreshToken);
                 }
                 
-                return Ok(new LoginResponse
+                return Ok(new LoginResponseModel
                 {
                     AccessToken = authenService.CreateToken(claims),
                     RefreshToken = NewRefreshToken.refreshToken
@@ -74,7 +74,7 @@ namespace WebApplicationAPI.Controllers
         }
         [HttpPost]
         [Route("register")]
-        public IActionResult Register([FromBody] RegisterRequest Model)
+        public IActionResult Register([FromBody] RegisterRequestModel Model)
         {
             if (!ModelState.IsValid)
             {
@@ -111,7 +111,7 @@ namespace WebApplicationAPI.Controllers
         }
         [HttpPost]
         [Route ("Refresh-token")]
-        public IActionResult RefreshToken([FromBody] LoginResponse Model)
+        public IActionResult RefreshToken([FromBody] LoginResponseModel Model)
         {
             var Claims = authenService.GetPrincipalFromExpiredToken(Model.AccessToken);
             var User = userService.FindOne(c => c.Username.Equals(Claims.Identity.Name));
@@ -135,14 +135,14 @@ namespace WebApplicationAPI.Controllers
                 }
                 else
                 {
-                    return Ok(new LoginResponse() { AccessToken = authenService.CreateToken(Claims.Claims.ToList()),RefreshToken =Model.RefreshToken});
+                    return Ok(new LoginResponseModel() { AccessToken = authenService.CreateToken(Claims.Claims.ToList()),RefreshToken =Model.RefreshToken});
                 }  
             }
         }
         [HttpPut]
         [Authorize]
         [Route ("Change-password")]
-        public IActionResult ChangePassword([FromBody] ChangePasswordRequest Model)
+        public IActionResult ChangePassword([FromBody] ChangePasswordRequestModel Model)
         {
             if (!ModelState.IsValid)
             {

@@ -10,8 +10,8 @@ namespace WebApplicationAPI.Mapper
         public ProductMapper()
         {
             CreateMap<Product, ProductView>();
-            CreateMap<ProductAdd, Product>();
-            CreateMap<ProductUpdate, Product>();
+            CreateMap<ProductAddModel, Product>();
+            CreateMap<ProductUpdateModel, Product>();
         }
     }
 }

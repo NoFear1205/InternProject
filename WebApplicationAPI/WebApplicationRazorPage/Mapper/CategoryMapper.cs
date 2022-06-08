@@ -15,7 +15,7 @@ namespace WebApplicationAPI.Mapper
                 .ForMember(
                 res => res.Name,
                 opt => opt.MapFrom(src => $"{src.Name}"));
-            CreateMap<CategoryAdd, Category>()
+            CreateMap<CategoryAddModel, Category>()
                 .ForMember(
                 res => res.Name,
                 opt => opt.MapFrom(src => $"{src.Name}"));

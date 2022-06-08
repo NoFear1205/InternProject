@@ -22,7 +22,7 @@ namespace WebApplicationAPI.Mapper
                 .ForMember(
                 res => res.CategoryName,
                 opt => opt.MapFrom(src => $"{src.Category.Name}"));
-            CreateMap<ProductAdd, Product>()
+            CreateMap<ProductAddModel, Product>()
                 .ForMember(
                res => res.Name,
                opt => opt.MapFrom(src => $"{src.Name }"))
@@ -32,7 +32,7 @@ namespace WebApplicationAPI.Mapper
                 .ForMember(
                res => res.CategoryID,
                opt => opt.MapFrom(src => $"{src.CategoryId }"));
-            CreateMap<ProductUpdate, Product>()
+            CreateMap<ProductUpdateModel, Product>()
                 .ForMember(
                res => res.Id,
                opt => opt.MapFrom(src => $"{src.Id }"))
@@ -45,7 +45,7 @@ namespace WebApplicationAPI.Mapper
                 .ForMember(
                res => res.CategoryID,
                opt => opt.MapFrom(src => $"{src.CategoryID }"));
-            CreateMap<Product, ProductUpdate>()
+            CreateMap<Product, ProductUpdateModel>()
                 .ForMember(
                res => res.Id,
                opt => opt.MapFrom(src => $"{src.Id }"))

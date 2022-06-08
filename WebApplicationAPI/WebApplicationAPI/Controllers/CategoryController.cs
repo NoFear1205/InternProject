@@ -20,7 +20,7 @@ namespace WebApplicationAPI.Controllers
             this.mapper = Mapper;
         }
         [HttpPost, Authorize(Roles = "Admin")]
-        public IActionResult Add([FromBody] CategoryAdd Model)
+        public IActionResult Add([FromBody] CategoryAddModel Model)
         {
             if (ModelState.IsValid)
             {

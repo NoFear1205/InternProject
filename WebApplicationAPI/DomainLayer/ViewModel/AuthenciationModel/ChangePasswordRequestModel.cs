@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.ViewModel
 {
-    public class ChangePasswordRequest
+    public class ChangePasswordRequestModel
     {
         [Required]
         public string OldPassword { get; set; }

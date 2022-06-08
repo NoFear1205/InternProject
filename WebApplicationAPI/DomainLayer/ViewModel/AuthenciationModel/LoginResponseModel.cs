@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.ViewModel
 {
-    public class LoginResponse
+    public class LoginResponseModel
     {
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }    

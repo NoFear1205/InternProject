@@ -21,7 +21,7 @@ namespace WebApplicationAPI.Controllers
             this.mapper= Mapper;
         }
         [HttpPost]
-        public IActionResult Add([FromBody] ProductAdd Model)
+        public IActionResult Add([FromBody] ProductAddModel Model)
         {
             
             if (ModelState.IsValid)
@@ -71,7 +71,7 @@ namespace WebApplicationAPI.Controllers
         }
         [HttpPut]
         [Route("Update")]
-        public  IActionResult Update([FromBody] ProductUpdate Model)
+        public  IActionResult Update([FromBody] ProductUpdateModel Model)
         {
 
             if (productService.FindOne(c => c.Id == Model.Id) != null)

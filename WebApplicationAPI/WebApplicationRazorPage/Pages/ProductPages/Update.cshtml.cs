@@ -13,7 +13,7 @@ namespace WebApplicationRazorPage.Pages.ProductPages
     {
         private readonly IBaseService<Product> baseService;
         private readonly IMapper mapper;
-        public ProductUpdate product;
+        public ProductUpdateModel product;
         public UpdateModel(IBaseService<Product> baseService, IMapper mapper)
         {
             this.baseService = baseService;
@@ -21,9 +21,9 @@ namespace WebApplicationRazorPage.Pages.ProductPages
         }
         public void OnGet(int id)
         {
-            product = mapper.Map<ProductUpdate>(baseService.FindOne(c=>c.Id==id));
+            product = mapper.Map<ProductUpdateModel>(baseService.FindOne(c=>c.Id==id));
         }
-        public IActionResult OnPost(ProductUpdate model)
+        public IActionResult OnPost(ProductUpdateModel model)
         {
             baseService.Update(mapper.Map<Product>(model));
             return RedirectToPage("Index");

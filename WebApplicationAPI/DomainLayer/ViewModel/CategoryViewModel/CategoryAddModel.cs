@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.Model
 {
-    public class CategoryAdd
+    public class CategoryAddModel
     {
         [Required]
         [MaxLength(100)]    
         public string Name { get; set; }
-        public List<ProductAdd>? Products { get; set; }
+        public List<ProductAddModel>? Products { get; set; }
     }
 }

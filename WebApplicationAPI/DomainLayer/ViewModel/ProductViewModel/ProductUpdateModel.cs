@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DomainLayer.ViewModel.ProductMapper
 {
-    public class ProductUpdate
+    public class ProductUpdateModel
     {
         [Required]
         public int Id { get; set; }
