@@ -23,8 +23,8 @@ namespace RepositoryLayer.Implentation
         public bool Add(T Model)
         {
             table.Add(Model);
-            int row_Count = context.SaveChanges();
-            return row_Count > 0;
+            int RowCount = context.SaveChanges();
+            return RowCount > 0;
         }
 
         public bool Delete(T Model)
