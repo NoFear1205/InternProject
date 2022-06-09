@@ -14,48 +14,48 @@ namespace RepositoryLayer.Implentation
     {
         private readonly ApplicationDbContext context;
         private DbSet<T> table;
-        public BaseRepository(ApplicationDbContext Context)
+        public BaseRepository(ApplicationDbContext context)
         {
-            this.context = Context;
-            table = Context.Set<T>();
+            this.context = context;
+            table = context.Set<T>();
         }
 
-        public bool Add(T Model)
+        public bool Add(T model)
         {
-            table.Add(Model);
+            table.Add(model);
             int RowCount = context.SaveChanges();
             return RowCount > 0;
         }
 
-        public bool Delete(T Model)
+        public bool Delete(T model)
         {
-            table.Remove(Model);
+            table.Remove(model);
             int RowCount = context.SaveChanges();
             return RowCount > 0;
         }
 
-        public List<T> FindList(Expression<Func<T, bool>> Predicate, string? Incudes = null)
+        public List<T> FindList(Expression<Func<T, bool>> predicate, string? incudes = null)
         {
-            if (Incudes == null)
+            if (incudes == null)
             {
-                return table.Where(Predicate).ToList();
+                return table.Where(predicate).ToList();
             }
             else
             {
-                var query = table.Include(Incudes).Where(Predicate).AsQueryable();
+                var query = table.Include(incudes).Where(predicate).AsQueryable();
                 return query.ToList();
             }
         }
 
-        public T? FindOne(Expression<Func<T, bool>> Predicate, string Incudes)
+        public T? FindOne(Expression<Func<T, bool>> predicate, string incudes)
         {
-            if (Incudes != null)
+            if (incudes != null)
             {
-                return table.Include(Incudes).Where(Predicate).AsNoTracking().FirstOrDefault();
+                return table.Include(incudes).Where(predicate).AsNoTracking().FirstOrDefault();
             }
             else
             {
-                return table.Where(Predicate).AsNoTracking().FirstOrDefault();
+                return table.Where(predicate).AsNoTracking().FirstOrDefault();
             }
 
         }
@@ -65,23 +65,23 @@ namespace RepositoryLayer.Implentation
             return table.ToList();
         }
 
-        public List<T> List(Expression<Func<T, bool>> Predicate, int Page, int PageSize, string? Incudes = null)
+        public List<T> List(Expression<Func<T, bool>> predicate, int page, int pageSize, string? incudes = null)
         {
-            if(Incudes != null)
+            if(incudes != null)
             {
-                var Query = table.Include(Incudes).Where(Predicate).AsQueryable();
-                return Query.Skip((Page - 1) * PageSize).Take(PageSize).ToList();
+                var Query = table.Include(incudes).Where(predicate).AsQueryable();
+                return Query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             }
             else
             {
-                var Query = table.Where(Predicate).AsQueryable();
-                return Query.Skip((Page - 1) * PageSize).Take(PageSize).ToList();
+                var Query = table.Where(predicate).AsQueryable();
+                return Query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             }
         }
 
-        public bool Update(T Model)
+        public bool Update(T model)
         {
-            table.Update(Model);
+            table.Update(model);
             int RowCount = context.SaveChanges();
             return RowCount > 0;
         }

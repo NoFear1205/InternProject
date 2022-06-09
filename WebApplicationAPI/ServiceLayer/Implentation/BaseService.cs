@@ -13,28 +13,28 @@ namespace ServiceLayer.Implentation
     public class BaseService<T> : IBaseService<T> where T : class
     {
         private readonly IBaseRepository<T> baseRepository;
-        public BaseService(IBaseRepository<T> BaseRepository)
+        public BaseService(IBaseRepository<T> baseRepository)
         {
-            this.baseRepository = BaseRepository;
+            this.baseRepository = baseRepository;
         }
-        public bool Add(T Model)
+        public bool Add(T model)
         {
-            return baseRepository.Add(Model);
-        }
-
-        public bool Delete(T Model)
-        {
-            return baseRepository.Delete(Model);
+            return baseRepository.Add(model);
         }
 
-        public List<T> FindList(Expression<Func<T, bool>> Predicate,string? Incudes)
+        public bool Delete(T model)
         {
-            return baseRepository.FindList(Predicate, Incudes); 
+            return baseRepository.Delete(model);
         }
 
-        public T? FindOne(Expression<Func<T, bool>> Predicate, string? Incudes = null)
+        public List<T> FindList(Expression<Func<T, bool>> predicate,string? incudes)
         {
-            return (T?)baseRepository.FindOne(Predicate, Incudes);
+            return baseRepository.FindList(predicate, incudes); 
+        }
+
+        public T? FindOne(Expression<Func<T, bool>> predicate, string? incudes = null)
+        {
+            return (T?)baseRepository.FindOne(predicate, incudes);
         }
 
         public List<T> Get()
@@ -42,14 +42,14 @@ namespace ServiceLayer.Implentation
             return baseRepository.Get();
         }
 
-        public List<T> List(Expression<Func<T, bool>> Predicate, int Page, int PageSize, string? Incudes = null)
+        public List<T> List(Expression<Func<T, bool>> predicate, int page, int pageSize, string? incudes = null)
         {
-           return baseRepository.List(Predicate, Page, PageSize, Incudes);
+           return baseRepository.List(predicate, page, pageSize, incudes);
         }
 
-        public bool Update(T Model)
+        public bool Update(T model)
         {
-            return baseRepository.Update(Model);
+            return baseRepository.Update(model);
         }
     }
 }

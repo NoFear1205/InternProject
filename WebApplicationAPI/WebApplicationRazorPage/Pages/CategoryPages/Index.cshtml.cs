@@ -9,12 +9,12 @@ namespace WebApplicationRazorPage.Pages.CategoryPages
 {
     public class IndexModel : PageModel
     {
-        private readonly IBaseService<Category> baseService;
-        public IndexModel(IBaseService<Category> baseService)
+        private readonly IBaseService<Role> baseService;
+        public IndexModel(IBaseService<Role> baseService)
         {
             this.baseService = baseService;
         }
-        public List<Category> list { get; set; }
+        public List<Role> list { get; set; }
         public void OnGet()
         {
             list = baseService.Get();

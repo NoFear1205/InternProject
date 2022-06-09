@@ -21,17 +21,17 @@ namespace WebApplicationAPI.Controllers
             return Ok(baseService.Get());
         }
         [HttpPost]
-        public IActionResult Index(Role Model)
+        public IActionResult Index(Role model)
         {
 
-            return Ok(baseService.Add(Model));
+            return Ok(baseService.Add(model));
         }
         [HttpGet]
         [Route("Paging")]
-        public IActionResult ListOfRole(int Page,string SearchValue)
+        public IActionResult ListOfRole(int page,string searchValue)
         {
             int PageSize = 10;
-            return Ok(baseService.List(c => c.Name.Contains(SearchValue), Page, PageSize));           
+            return Ok(baseService.List(c => c.Name.Contains(searchValue), page, PageSize));           
         }
     }
 }

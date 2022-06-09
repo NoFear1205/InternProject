@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DomainLayer.Model;
 using DomainLayer.ViewModel.CategoryView;
+using DomainLayer.ViewModel.CategoryViewModel;
 
 namespace WebApplicationAPI.Mapper
 {
@@ -8,9 +9,10 @@ namespace WebApplicationAPI.Mapper
     {
         public CategoryMapper()
         {
-            CreateMap<Category, CategoryView>();
-            CreateMap<CategoryView, Category>();
-            CreateMap<CategoryAddModel, Category>();
+            CreateMap<Role, CategoryView>();
+            CreateMap<CategoryView, Role>();
+            CreateMap<CategoryAddModel, Role>();
+            CreateMap<CategoryUpdateModel, Role>();
         }
     }
 }

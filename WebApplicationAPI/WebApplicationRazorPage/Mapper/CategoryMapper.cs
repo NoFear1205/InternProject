@@ -8,7 +8,7 @@ namespace WebApplicationAPI.Mapper
     {
         public CategoryMapper()
         {
-            CreateMap<Category,CategoryView>()
+            CreateMap<Category, CategoryView>()
                  .ForMember(
                 res => res.Id,
                 opt => opt.MapFrom(src => $"{src.Id }"))

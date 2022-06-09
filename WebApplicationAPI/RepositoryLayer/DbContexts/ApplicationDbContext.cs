@@ -37,5 +37,6 @@ namespace RepositoryLayer.DbContexts
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<UserRole> User_Role { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 }

@@ -9,9 +9,9 @@ namespace WebApplicationRazorPage.Pages.CategoryPages
     [BindProperties]
     public class DeleteModel : PageModel
     {
-        private readonly IBaseService<Category> baseService;
-        public Category category;
-        public DeleteModel(IBaseService<Category> baseService)
+        private readonly IBaseService<Role> baseService;
+        public Role category;
+        public DeleteModel(IBaseService<Role> baseService)
         {
             this.baseService = baseService;
         }

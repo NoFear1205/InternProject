@@ -15,25 +15,25 @@ namespace DomainLayer.Model
         public List<UserRole>? UserRoles { get; private set; }
         public IList<RefreshToken>? RefreshToken { get; private set; }
         public User() { }
-        public void SetId(int Id)
+        public void SetId(int id)
         {
-            this.Id=Id;
+            this.Id=id;
         }
-        public void SetUsername(string Username)
+        public void SetUsername(string username)
         {
-            this.Username = Username;
+            this.Username = username;
         }
-        public void SetPasswordHash(byte[] PasswordHash)
+        public void SetPasswordHash(byte[] passwordHash)
         { 
-            this.PasswordHash = PasswordHash;
+            this.PasswordHash = passwordHash;
         }
-        public void SetPasswordSalt(byte[] PasswordSalt)
+        public void SetPasswordSalt(byte[] passwordSalt)
         {
-            this.PasswordSalt = PasswordSalt;
+            this.PasswordSalt = passwordSalt;
         }
-        public void SetUserRoles(List<UserRole>? UserRoles)
+        public void SetUserRoles(List<UserRole>? userRoles)
         {
-            this.UserRoles = UserRoles;
+            this.UserRoles = userRoles;
         }
 
 

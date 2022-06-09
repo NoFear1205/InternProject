@@ -24,7 +24,7 @@ namespace ServiceLayer.Implentation
             this.config = config;
             this.refresh = refresh;
         }
-        public string CreateToken(List<Claim> Claims)
+        public string CreateToken(List<Claim> claims)
         {
             var Key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
                 config.GetSection("AppSettings:Token").Value));
@@ -32,30 +32,30 @@ namespace ServiceLayer.Implentation
             var Credentials = new SigningCredentials(Key, SecurityAlgorithms.HmacSha512Signature);
 
             var token = new JwtSecurityToken(
-                claims: Claims,
+                claims: claims,
                 notBefore: DateTime.UtcNow,
                 expires: DateTime.UtcNow.AddMinutes(1),
                 signingCredentials: Credentials);
             var Token = new JwtSecurityTokenHandler().WriteToken(token);
             return Token;
         }
-        public void CreatePasswordHash(string Password, out byte[] PasswordHash, out byte[] PasswordSalt)
+        public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512())
             {
-                PasswordSalt = hmac.Key;
-                PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Password));
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
         }
-        public bool VerifyPasswordHash(string Password, byte[] PasswordHash, byte[] PasswordSalt)
+        public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
-            using (var hmac = new HMACSHA512(PasswordSalt))
+            using (var hmac = new HMACSHA512(passwordSalt))
             {
-                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Password));
-                return computedHash.SequenceEqual(PasswordHash);
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                return computedHash.SequenceEqual(passwordHash);
             }
         }
-        public RefreshToken GenerateRefreshToken(int UserId)
+        public RefreshToken GenerateRefreshToken(int userId)
         {
             var RandomNumber = new byte[32];
             using (var rng = RandomNumberGenerator.Create())
@@ -64,20 +64,20 @@ namespace ServiceLayer.Implentation
                 return new RefreshToken()
                 {
                     refreshToken = Convert.ToBase64String(RandomNumber),
-                    UserID = UserId,
+                    UserID = userId,
                     Expires = DateTime.UtcNow.AddMinutes(10)
                 };
             }
         }
-        public bool AddRefreshToken(RefreshToken Model)
+        public bool AddRefreshToken(RefreshToken model)
         {
-            return refresh.Add(Model);
+            return refresh.Add(model);
         }
-        public bool UpdateRefreshToken(RefreshToken Model)
+        public bool UpdateRefreshToken(RefreshToken model)
         {
-            return refresh.Update(Model);
+            return refresh.Update(model);
         }
-        public ClaimsPrincipal? GetPrincipalFromExpiredToken(string? Token)
+        public ClaimsPrincipal? GetPrincipalFromExpiredToken(string? token)
         {
             ClaimsPrincipal Principal;
             var TokenValidationParameters = new TokenValidationParameters
@@ -90,7 +90,7 @@ namespace ServiceLayer.Implentation
             };
 
             var TokenHandler = new JwtSecurityTokenHandler();
-            Principal = TokenHandler.ValidateToken(Token, TokenValidationParameters, out SecurityToken SecurityToken);
+            Principal = TokenHandler.ValidateToken(token, TokenValidationParameters, out SecurityToken SecurityToken);
             return Principal;
 
         }

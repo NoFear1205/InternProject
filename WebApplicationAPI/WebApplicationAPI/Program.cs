@@ -45,20 +45,20 @@ builder.Services.AddDbContext<ApplicationDbContext>(con => con.UseSqlServer(
 //builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
 
 //DI Repository
-builder.Services.AddScoped<IBaseRepository<Category>, BaseRepository<Category>>();
-builder.Services.AddScoped<IBaseRepository<Product>, BaseRepository<Product>>();
-builder.Services.AddScoped<IBaseRepository<User>, BaseRepository<User>>();
-builder.Services.AddScoped<IBaseRepository<UserRole>, BaseRepository<UserRole>>();
-builder.Services.AddScoped<IBaseRepository<Role>, BaseRepository<Role>>();
-builder.Services.AddScoped<IBaseRepository<RefreshToken>, BaseRepository<RefreshToken>>();
+builder.Services.AddScoped<IBaseRepository<Category>, CategoryRepository>();
+builder.Services.AddScoped<IBaseRepository<Product>, ProductRepository>();
+builder.Services.AddScoped<IBaseRepository<User>, UserRepository>();
+builder.Services.AddScoped<IBaseRepository<UserRole>, UserRoleRepository>();
+builder.Services.AddScoped<IBaseRepository<Role>, RoleRepository>();
+builder.Services.AddScoped<IBaseRepository<RefreshToken>, RefreshTokenRepository>();
 
 //DI Service
-builder.Services.AddScoped<IBaseService<Category>, BaseService<Category>>();
-builder.Services.AddScoped<IBaseService<Product>, BaseService<Product>>();
-builder.Services.AddScoped<IBaseService<User>, BaseService<User>>();
-builder.Services.AddScoped<IBaseService<UserRole>, BaseService<UserRole>>();
-builder.Services.AddScoped<IBaseService<Role>, BaseService<Role>>();
-builder.Services.AddScoped<IBaseService<RefreshToken>, BaseService<RefreshToken>>();
+builder.Services.AddScoped<IBaseService<Category>,CategoryService>();
+builder.Services.AddScoped<IBaseService<Product>, ProductService>();
+builder.Services.AddScoped<IBaseService<User>, UserService>();
+builder.Services.AddScoped<IBaseService<UserRole>, UserRoleService>();
+builder.Services.AddScoped<IBaseService<Role>, RoleService>();
+builder.Services.AddScoped<IBaseService<RefreshToken>, RefreshTokenService>();
 builder.Services.AddScoped<IAuthenService, AuthenciationService>();
 var app = builder.Build();
 

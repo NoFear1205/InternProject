@@ -10,9 +10,9 @@ namespace WebApplicationRazorPage.Pages.CategoryPages
 
     public class CreateModel : PageModel
     {
-        private readonly IBaseService<Category> baseService;
+        private readonly IBaseService<Role> baseService;
         private readonly IMapper mapper;
-        public CreateModel(IBaseService<Category> baseService, IMapper mapper)
+        public CreateModel(IBaseService<Role> baseService, IMapper mapper)
         {
             this.baseService = baseService;
             this.mapper = mapper;
@@ -24,7 +24,7 @@ namespace WebApplicationRazorPage.Pages.CategoryPages
 
         public IActionResult OnPost(CategoryAddModel model) 
         {
-            baseService.Add(mapper.Map<Category>(model));
+            baseService.Add(mapper.Map<Role>(model));
             return RedirectToPage("Index");
         }
     }

@@ -13,13 +13,13 @@ namespace DomainLayer.Model
         public string? Name { get; private set; }
         public List<Product>? Products { get; private set; }
         public Category() { }
-        public void SetName(string Name)
+        public void SetName(string name)
         {
-            this.Name = Name;
+            this.Name = name;
         }
-        public void SetProduct(List<Product>? Products)
+        public void SetProduct(List<Product>? products)
         {
-            this.Products = Products;
+            this.Products = products;
         }
 
     }

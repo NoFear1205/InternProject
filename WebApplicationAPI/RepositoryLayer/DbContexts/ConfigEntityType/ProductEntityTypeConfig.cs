@@ -20,10 +20,11 @@ namespace RepositoryLayer.DbContextLayer
             Builder
              .Property(p => p.Provider)
              .HasMaxLength(100).IsRequired();
-            Builder.HasOne<Category>(c => c.Category)
+            Builder.HasOne<Category>(c=>c.Category)
                    .WithMany(p => p.Products)
                    .OnDelete(DeleteBehavior.Restrict)
                    .HasForeignKey(c => c.CategoryID);
+            Builder.Ignore(c=>c.Category);
         }
     }
 }

@@ -14,5 +14,6 @@ namespace DomainLayer.ViewModel.CategoryView
         [Required]
         [MaxLength(100)]
         public string Name { get; set; }
+        public List<Product>? products { get; set; }
     }
 }

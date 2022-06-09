@@ -11,10 +11,10 @@ namespace WebApplicationRazorPage.Pages.CategoryPages
     [BindProperties]
     public class UpdateModel : PageModel
     {
-        private readonly IBaseService<Category> baseService;
+        private readonly IBaseService<Role> baseService;
         private readonly IMapper mapper;
-        public Category category;
-        public UpdateModel(IBaseService<Category> baseService, IMapper mapper)
+        public Role category;
+        public UpdateModel(IBaseService<Role> baseService, IMapper mapper)
         {
             this.baseService = baseService;
             this.mapper = mapper;
@@ -25,7 +25,7 @@ namespace WebApplicationRazorPage.Pages.CategoryPages
         }
         public IActionResult OnPost(CategoryView model)
         {
-            baseService.Update(mapper.Map<Category>(model));
+            baseService.Update(mapper.Map<Role>(model));
             return RedirectToPage("Index");
         }
     }

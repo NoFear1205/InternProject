@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DomainLayer.Model;
 using DomainLayer.ViewModel.CategoryView;
+using DomainLayer.ViewModel.CategoryViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ServiceLayer.Interfaces;
@@ -12,34 +13,34 @@ namespace WebApplicationAPI.Controllers
     [Authorize]
     public class CategoryController : Controller
     {
-        private readonly IBaseService<Category> categoryService;
+        private readonly IBaseService<Role> categoryService;
         private readonly IMapper mapper;
-            public CategoryController(IBaseService<Category> CategoryService, IMapper Mapper)
+            public CategoryController(IBaseService<Role> categoryService, IMapper mapper)
         {
-            this.categoryService = CategoryService;
-            this.mapper = Mapper;
+            this.categoryService = categoryService;
+            this.mapper = mapper;
         }
         [HttpPost, Authorize(Roles = "Admin")]
-        public IActionResult Add([FromBody] CategoryAddModel Model)
+        public IActionResult Add([FromBody] CategoryAddModel model)
         {
             if (ModelState.IsValid)
             {
-                  return Ok(categoryService.Add(mapper.Map<Category>(Model)));
+                  return Ok(categoryService.Add(mapper.Map<Role>(model)));
             }
             return BadRequest(ModelState);
         }
         [HttpGet]
         [Route("Pagination")]
-        public IActionResult Paging(int Page, string? SearchValue = "", int PageSize = 0)
+        public IActionResult Paging(int page, string? searchValue = "", int pageSize = 0)
         {
-            if(PageSize == 0)
-                PageSize = 10;
-            if(Page <= 0)
+            if(pageSize == 0)
+                pageSize = 10;
+            if(page <= 0)
             {
-                Page = 1;
+                page = 1;
             }
             List<CategoryView> list = new List<CategoryView>();
-            foreach(var item in categoryService.List(c => c.Name.Contains(SearchValue), Page, PageSize))
+            foreach(var item in categoryService.List(c => c.Name.Contains(searchValue), page, pageSize))
             {
                 list.Add(mapper.Map<CategoryView>(item));
             }
@@ -47,17 +48,17 @@ namespace WebApplicationAPI.Controllers
         }
         [HttpGet]
         [Route("Get-one")]
-        public IActionResult GetOne(int Id)
+        public IActionResult GetOne(int id)
         {
-            var Category = categoryService.FindOne(c => c.Id == Id);
+            var Category = categoryService.FindOne(c => c.Id == id);
 
              return Ok(mapper.Map<CategoryView>(Category));   
         }
         [HttpDelete]
         [Route("Delete")]
-        public IActionResult Delete([FromBody] int[] Id)
+        public IActionResult Delete([FromBody] int[] id)
         {
-            foreach(var item in Id)
+            foreach(var item in id)
             {
                 var Category = categoryService.FindOne(c => c.Id == item);
                 if (Category != null)
@@ -69,12 +70,12 @@ namespace WebApplicationAPI.Controllers
         }
         [HttpPut]
         [Route("Update")]
-        public IActionResult Update([FromBody] CategoryView Model)
+        public IActionResult Update([FromBody] CategoryUpdateModel model)
         {
-            
-            if (categoryService.FindOne(c => c.Id == Model.Id) != null)
+            var temp = categoryService.FindOne(c => c.Id == model.Id);
+            if (temp != null)
             {
-                return Ok(categoryService.Update(mapper.Map<Category>(Model)));
+                return Ok(categoryService.Update(mapper.Map<Role>(model)));
             }
             else return NotFound("No find record");
         }
